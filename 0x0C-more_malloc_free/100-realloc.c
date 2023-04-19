@@ -1,38 +1,23 @@
 #include "main.h"
 
 /**
- * _realloc - reallocates a memory block using malloc and free
- * @ptr: pointer to the memory previously allocated
- * @old_size:is the size, in bytes, of the allocated space for ptr
- * @new_size: the new size, in bytes of the new memory block
- * Return: pointer allocate new size memory, or NULL
+ * _calloc - allocates memory for an array of @nmemb elements of
+ * @size bytes each and returns a pointer to the allocated memory.
+ * @nmemb: allocate memory for array
+ * @size: allocate element of size bytes
+ * Return: pointer to the allocated memory.
  */
-
-void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
+void *_calloc(unsigned int nmemb, unsigned int size)
 {
-	char *p;
-	unsigned int i, n = new_size;
-	char *oldp = ptr;
+	char *a;
+	unsigned int b;
 
-	if (ptr == NULL)
-	{
-		p = malloc(new_size);
-		return (p);
-	}
-	else if (new_size == 0)
-	{
-		free(ptr);
+	if (nmemb == 0 || size == 0)
 		return (NULL);
-	}
-	else if (new_size == old_size)
-		return (ptr);
-	p = malloc(new_size);
-	if (p == NULL)
+	a = malloc(nmemb * size);
+	if (a == NULL)
 		return (NULL);
-	if (new_size > old_size)
-		n = old_size;
-	for (i = 0; i < n; i++)
-		p[i] = oldp[i];
-	free(ptr);
-	return (p);
+	for (b = 0; b < (nmemb * size); b++)
+		a[b] = 0;
+	return (a);
 }
